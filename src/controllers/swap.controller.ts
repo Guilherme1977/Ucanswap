@@ -36,11 +36,19 @@ export class SwapController {
     enderecoDestino: string,
     valor: number
   ): Promise<boolean> {
-    const sucesso = await this.contracto.transfer(
-      enderecoDestino,
-      valor
-    );
-    return sucesso;
+    try {
+      const sucesso = await this.contracto.transfer(
+        enderecoDestino,
+        valor
+      );
+      return sucesso;
+
+    } catch (err) {
+      console.log(err);
+
+    }
+
+    return false;
   }
 
   async tansferirPara(
@@ -48,11 +56,18 @@ export class SwapController {
     enderecoDestino: string,
     valor: number
   ): Promise<boolean> {
-    const sucesso = await this.contracto.transferFrom(
-      enderecoOrigem,
-      enderecoDestino,
-      valor
-    );
-    return sucesso;
+    try {
+      const sucesso = await this.contracto.transferFrom(
+        enderecoOrigem,
+        enderecoDestino,
+        valor
+      );
+      return sucesso;
+
+    } catch (error) {
+      console.log(error);
+    }
+
+    return false;
   }
 }
